@@ -1,0 +1,99 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    button {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    button a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    button a:hover {
+        color: #fff;
+    }
+
+    #idMensajes {
+        margin-top: 20px;
+        text-align: center;
+        color: green;
+    }
+</style>
+{% extends "base.html" %}
+
+{% block content %}
+<ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Active</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact' %}">Index</a>
+      </li>
+  </ul>
+
+
+<div class="row">
+
+    <div class="col-9">
+        <h2>Recepcion de solicitudes</h2>
+        <hr>
+        <table>
+            {% if solicitudes %}
+                <tr>
+                    <th>ID</th>
+                    <th>Estado</th>
+                    <th>Nombre</th>
+                    <th>Detalle</th>
+                    <th>Modificar</th>
+                </tr>
+                {% for x in solicitudes %}
+                    <tr>
+                        <td>{{ x.id }}</td>
+                        <td>{{ x.idEstado }}</td>
+                        <td>{{ x.nombre }}</td>
+                        <td>{{ x.detalle }}</td>
+                        <td><a href="{% url 'cambioEstado' pk=x.id %}">Modificar</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+        
+    </div>
+</div>
+
+{% endblock %}
